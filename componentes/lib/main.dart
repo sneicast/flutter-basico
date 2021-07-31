@@ -1,5 +1,8 @@
-import 'package:componentes/src/pages/home_temp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'package:componentes/src/routes/routes.dart';
+import 'package:componentes/src/pages/alert_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,12 +12,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Componentess App',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Componentes'),
-        ),
-        body: HomePageTemp(),
-      ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English, no country code
+        Locale('es', 'ES'), // Spanish, no country code
+      ],
+      initialRoute: '/',
+      routes: getApplicationRoutes(),
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (BuildContext context) => AlertPage(),
+        );
+      },
     );
   }
 }
